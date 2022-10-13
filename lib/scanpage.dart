@@ -59,14 +59,14 @@ class scanstate extends State<scanpage> {
                                   builder: (c, snapshot) {
                                     if (snapshot.data ==
                                         BluetoothDeviceState.connected) {
-                                      return RaisedButton(
+                                      return ElevatedButton(
                                         child: const Text('中斷連線'),
                                         onPressed: () async {
                                           await d.disconnect();
                                         },
                                       );
                                     } else {
-                                      return RaisedButton(
+                                      return ElevatedButton(
                                         child: const Text('重新連線'),
                                         onPressed: () async {
                                           await d
@@ -101,7 +101,7 @@ class scanstate extends State<scanpage> {
                                     e.device.name.isNotEmpty)
                                 .map((e) => ListTile(
                                     title: Text(e.device.name),
-                                    trailing: RaisedButton(
+                                    trailing: ElevatedButton(
                                       child: const Text('連線'),
                                       onPressed: () async {
                                         try {

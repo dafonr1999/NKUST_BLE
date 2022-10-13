@@ -56,7 +56,7 @@ class BLE_controlpanel_state extends State<ble_controlpanel> {
                                 builder: (c, snapshot) {
                                   if (snapshot.data ==
                                       BluetoothDeviceState.connected) {
-                                    return RaisedButton(
+                                    return ElevatedButton(
                                       child: const Text('disconnect'),
                                       onPressed: () {
                                         d.disconnect();

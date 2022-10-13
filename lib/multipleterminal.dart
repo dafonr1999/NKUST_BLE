@@ -122,7 +122,7 @@ class terminalstate extends State<terminal> with TickerProviderStateMixin {
                                 return const Text('連線中');
                               } else {
 
-                                return RaisedButton(
+                                return ElevatedButton(
                                   child: const Text('重新連線'),
                                   onPressed: () async {
                                     await d.connect(timeout: const Duration(seconds: 5), autoConnect: false).then((value) => setState(() {}));
