@@ -38,8 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<dynamic>callapi ()async{
 
-
-
   }
 
   @override
@@ -85,7 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   case (5):
                     {
-
                       break;
                     }
                   default:{
@@ -98,8 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     break;
                   }
                 }
-
-
               },
             );
           }),
