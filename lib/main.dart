@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: '國立高雄科技大學 電機工程系'),
+      home: const MyHomePage(title: 'Electric Vehicle Operation and Maintenance Training Course'),
     );
   }
 }

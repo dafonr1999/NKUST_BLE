@@ -33,13 +33,13 @@ class scanstate extends State<scanpage> {
           if (state == BluetoothState.on) {
             return Scaffold(
               appBar: AppBar(
-                title: const Text('搜尋裝置'),
+                title: const Text('search_device'),
               ),
               body: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     const Text(
-                      '已連線裝置',
+                      'connected_device',
                       textAlign: TextAlign.left,
                     ),
                     const Divider(),
@@ -60,14 +60,14 @@ class scanstate extends State<scanpage> {
                                     if (snapshot.data ==
                                         BluetoothDeviceState.connected) {
                                       return ElevatedButton(
-                                        child: const Text('中斷連線'),
+                                        child: const Text('Disconnect'),
                                         onPressed: () async {
                                           await d.disconnect();
                                         },
                                       );
                                     } else {
                                       return ElevatedButton(
-                                        child: const Text('重新連線'),
+                                        child: const Text('reconnect'),
                                         onPressed: () async {
                                           await d
                                               .connect(
@@ -86,7 +86,7 @@ class scanstate extends State<scanpage> {
                         }),
                     const Divider(),
                     const Text(
-                      '附近的裝置',
+                      'nearby_devices',
                       textAlign: TextAlign.left,
                     ),
                     const Divider(),
@@ -102,7 +102,7 @@ class scanstate extends State<scanpage> {
                                 .map((e) => ListTile(
                                     title: Text(e.device.name),
                                     trailing: ElevatedButton(
-                                      child: const Text('連線'),
+                                      child: const Text('connect'),
                                       onPressed: () async {
                                         try {
                                           await e.device

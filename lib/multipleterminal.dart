@@ -17,7 +17,7 @@ class terminal extends StatefulWidget {
 class terminalstate extends State<terminal> with TickerProviderStateMixin {
   TabController? tabController;
 
-  var features = ['預設Terminal', 'Demo溫度', 'MPR-25PA-1AB', 'ABP2-010BG-2A3xx'];
+  var features = ['Terminal' ,'Demo_Temperature'];
   int mode = 0;
   Map<String, StreamSubscription> Subscriptions = {};
   Map<String, List<btdata>> btdataList = {};
@@ -32,14 +32,13 @@ class terminalstate extends State<terminal> with TickerProviderStateMixin {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: btdataList.length,
         child: Scaffold(
             appBar: AppBar(
-              title: Text('模式:' + features[mode]),
+              title: Text('Mode:' + features[mode]),
               actions: [
                 IconButton(
                     onPressed: () {
@@ -53,6 +52,7 @@ class terminalstate extends State<terminal> with TickerProviderStateMixin {
                 PopupMenuButton(
                   icon: Icon(Icons.more_vert),
                   itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+
                     PopupMenuItem(
                       child: ListTile(
                         onTap: () {
@@ -64,6 +64,8 @@ class terminalstate extends State<terminal> with TickerProviderStateMixin {
                         title: const Text('Terminal'),
                       ),
                     ),
+
+
                     PopupMenuItem(
                       child: ListTile(
                         onTap: () {
@@ -72,31 +74,10 @@ class terminalstate extends State<terminal> with TickerProviderStateMixin {
                             mode = 1;
                           });
                         },
-                        title: const Text('Demo溫度'),
+                        title: const Text('Demo_temperature'),
                       ),
                     ),
-                    PopupMenuItem(
-                      child: ListTile(
-                        onTap: () {
-                          Navigator.pop(context);
-                          setState(() {
-                            mode = 2;
-                          });
-                        },
-                        title: const Text('MPR-25PA-1AB'),
-                      ),
-                    ),
-                    PopupMenuItem(
-                      child: ListTile(
-                        onTap: () {
-                          Navigator.pop(context);
-                          setState(() {
-                            mode = 3;
-                          });
-                        },
-                        title: const Text('ABP2-010BG-2A3xx'),
-                      ),
-                    ),
+
                   ],
                 ),
               ],
@@ -118,12 +99,10 @@ class terminalstate extends State<terminal> with TickerProviderStateMixin {
                             builder: (c, snapshot) {
                               if (snapshot.data == BluetoothDeviceState.connected) {
                                 discoverservice(d);
-
-                                return const Text('連線中');
+                                return const Text('Connecting');
                               } else {
-
                                 return ElevatedButton(
-                                  child: const Text('重新連線'),
+                                  child: const Text('Reconnect'),
                                   onPressed: () async {
                                     await d.connect(timeout: const Duration(seconds: 5), autoConnect: false).then((value) => setState(() {}));
                                   },
@@ -153,11 +132,10 @@ class terminalstate extends State<terminal> with TickerProviderStateMixin {
                                       {
                                         try {
                                           double c = (e.receivedata[0] - 32) * 5 / 9;
-                                          transdata = e.receivedata[0].toString() + 'f , ' + c.toStringAsFixed(2) + 'c';
+                                          transdata = e.receivedata[0].toString() + '°f , ' + c.toStringAsFixed(2) + '°c';
                                         } catch (e) {
-                                          transdata = '格式錯誤 無法轉換';
+                                          transdata = 'Erro';
                                         }
-
                                         break;
                                       }
                                     case (2):
@@ -165,10 +143,9 @@ class terminalstate extends State<terminal> with TickerProviderStateMixin {
                                         try {
                                           double out = (e.receivedata[0] * 65536 + e.receivedata[1] * 256 + e.receivedata[2] * 16).toDouble();
                                           double tout = (out - 1677722) * 25 / 13421772;
-
                                           transdata = tout.toStringAsFixed(3) + 'PSI';
                                         } catch (e) {
-                                          transdata = '格式錯誤 無法轉換';
+                                          transdata = 'Erro';
                                         }
 
                                         break;
@@ -184,7 +161,7 @@ class terminalstate extends State<terminal> with TickerProviderStateMixin {
 
                                           transdata = Pbar.toStringAsFixed(3) + 'Bar ,' + toc.toStringAsFixed(3) + 'oC';
                                         } catch (e) {
-                                          transdata = '格式錯誤 無法轉換';
+                                          transdata = 'Erro';
                                         }
 
                                         break;
